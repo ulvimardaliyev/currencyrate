@@ -15,22 +15,19 @@ public class Relationship {
     private BigDecimal m1;
     private BigDecimal m2;
 
-    public Relationship() {
-    }
-
-    public Relationship(ParseJsonResult parseJsonResult, String money1, String money2) {
-        Relationship.parsing = parseJsonResult;
-        Relationship.money1 = money1;
-        Relationship.money2 = money2;
-    }
 
 
-    public Relationship(BigDecimal value1, BigDecimal value2) {
+
+    private Relationship(BigDecimal value1, BigDecimal value2) {
         this.m1 = value1;
         this.m2 = value2;
     }
 
-    public Relationship parsingg() {
+    public static Relationship parsingg(int count,ParseJsonResult pJsonResult, String money1, String money2) {
+        Relationship.parsing = pJsonResult;
+        Relationship.money1 = money1;
+        Relationship.money2 = money2;
+
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         BigDecimal value1 = new BigDecimal(0);
