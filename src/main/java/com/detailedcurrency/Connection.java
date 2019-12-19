@@ -15,15 +15,15 @@ public class Connection {
         ParseJsonResult jsonResult;
 
         switch (count) {
-            /*case 0:
+            case 0:
                 jsonResult = new ParseJsonResult(establishConnectionWithURL(url));
                 rs = Relationship.parsingg(count, jsonResult, first, second);
                 break;
             case 1:
                 jsonResult = new ParseJsonResult(establishConnectionWithURL(url));
                 rs = Relationship.parsingg(count, jsonResult, first, second);
-                break;*/
-            case 0:
+                break;
+            case 3:
                 jsonResult = new ParseJsonResult(establishConnectionWithURL(url, first, second));
                 rs = Relationship.parsingg(count, jsonResult, first, second);
                 break;
