@@ -16,14 +16,12 @@ public class Relationship {
     private BigDecimal m2;
 
 
-
-
     private Relationship(BigDecimal value1, BigDecimal value2) {
         this.m1 = value1;
         this.m2 = value2;
     }
 
-    public static Relationship parsingg(int count,ParseJsonResult pJsonResult, String money1, String money2) {
+    public static Relationship parsingg(int count, ParseJsonResult pJsonResult, String money1, String money2) {
         Relationship.parsing = pJsonResult;
         Relationship.money1 = money1;
         Relationship.money2 = money2;
