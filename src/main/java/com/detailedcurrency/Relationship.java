@@ -11,7 +11,6 @@ public class Relationship {
     private static ParseJsonResult parsing;
     private static String money1;
     private static String money2;
-    private static BigDecimal result = new BigDecimal(0);
     private BigDecimal m1;
     private BigDecimal m2;
 
@@ -21,7 +20,7 @@ public class Relationship {
         this.m2 = value2;
     }
 
-    public static Relationship parsingg(int count, ParseJsonResult pJsonResult, String money1, String money2) {
+    public static Relationship parsingg(ParseJsonResult pJsonResult, String money1, String money2) {
         Relationship.parsing = pJsonResult;
         Relationship.money1 = money1;
         Relationship.money2 = money2;
@@ -32,12 +31,10 @@ public class Relationship {
         BigDecimal value2 = new BigDecimal(0);
 
         try {
-            System.out.println("inside try catch block");
             ParseJsonResult parseJsonResult = objectMapper.readValue(parsing.getJson(), ParseJsonResult.class);
 
-            if (parseJsonResult.getRates().containsKey("USD" + money1)) {
-                System.out.println("Inside If");
-                BigDecimal valueOne = parseJsonResult.getRates().get("USD" + money1); //5.808204 TRY
+            if (parseJsonResult.getRates().containsKey("USD" + Relationship.money1)) {
+                BigDecimal valueOne = parseJsonResult.getRates().get("USD" + Relationship.money1); //5.808204 TRY
 
                 //indi biz 2-ci pulu USD-e cevirib muqayise etmek isteyirik
                 //misalcun biz TRY-ni EUR-le muqayise etmek isteyirik
@@ -48,16 +45,16 @@ public class Relationship {
                 // X USD -- 1 EUR
                 // X = 1.111999475 USD
 
-                BigDecimal valueTwo = parseJsonResult.getRates().get("USD" + money2);//0.899281 EUR
+                BigDecimal valueTwo = parseJsonResult.getRates().get("USD" + Relationship.money2);//0.899281 EUR
                 value2 = value2.add(new BigDecimal(1).divide(valueTwo, 4, BigDecimal.ROUND_HALF_UP));//1 EUR = 1.111999475 USD
 
                 System.out.println("value1 is " + value1);
                 System.out.println("value2 is " + value2);
                 System.out.println("Divide is " + value1.divide(value2, 4));
-            } else if (parseJsonResult.getRates().containsKey(money1)) {
-                BigDecimal valueOne = parseJsonResult.getRates().get(money1); //5.808204 TRY
+            } else if (parseJsonResult.getRates().containsKey(Relationship.money1)) {
+                BigDecimal valueOne = parseJsonResult.getRates().get(Relationship.money1); //5.808204 TRY
                 value1 = value1.add(new BigDecimal(1).divide(valueOne, 4, BigDecimal.ROUND_HALF_UP));//1 TRY == 0.17217 USD
-                BigDecimal valueTwo = parseJsonResult.getRates().get(money2);//0.899281 EUR
+                BigDecimal valueTwo = parseJsonResult.getRates().get(Relationship.money2);//0.899281 EUR
                 value2 = value2.add(new BigDecimal(1).divide(valueTwo, 4, BigDecimal.ROUND_HALF_UP));//1 EUR = 1.111999475 USD
 
                 System.out.println("value1 is " + value1);

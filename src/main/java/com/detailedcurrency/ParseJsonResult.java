@@ -13,9 +13,9 @@ public class ParseJsonResult {
     private URL terms;
     private URL privacy;
     private Long timestamp;
-    private String base; // equals to source in second API
+    private String base;
     @JsonAlias(value = {"quotes", "rates"})
-    private HashMap<String, BigDecimal> rates; // equals to quotes in second API
+    private HashMap<String, BigDecimal> rates;
 
 
     public ParseJsonResult() {

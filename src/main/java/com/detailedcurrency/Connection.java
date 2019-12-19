@@ -16,16 +16,18 @@ public class Connection {
 
         switch (count) {
             case 0:
-                jsonResult = new ParseJsonResult(establishConnectionWithURL(url));
-                rs = Relationship.parsingg(count, jsonResult, first, second);
+                //jsonResult = new ParseJsonResult(establishConnectionWithURL(url));
+                jsonResult = new ParseJsonResult(establishConnectionWithURL(url, first, second));
+                rs = Relationship.parsingg(jsonResult, first, second);
                 break;
             case 1:
-                jsonResult = new ParseJsonResult(establishConnectionWithURL(url));
-                rs = Relationship.parsingg(count, jsonResult, first, second);
+                //jsonResult = new ParseJsonResult(establishConnectionWithURL(url));
+                jsonResult = new ParseJsonResult(establishConnectionWithURL(url, first, second));
+                rs = Relationship.parsingg(jsonResult, first, second);
                 break;
             case 3:
                 jsonResult = new ParseJsonResult(establishConnectionWithURL(url, first, second));
-                rs = Relationship.parsingg(count, jsonResult, first, second);
+                rs = Relationship.parsingg(jsonResult, first, second);
                 break;
             default:
                 System.out.println("No available urls");
@@ -35,7 +37,7 @@ public class Connection {
     }
 
 
-    private static String establishConnectionWithURL(String url) throws Exception {
+    /*private static String establishConnectionWithURL(String url) throws Exception {
         StringBuilder response = new StringBuilder();
         String result = null;
         URL urlCon = new URL(url);
@@ -58,13 +60,12 @@ public class Connection {
 
         }
         return result;
-    }
+    }*/
 
     private static String establishConnectionWithURL(String url, String val1, String val2) throws Exception {
         StringBuilder response = new StringBuilder();
         String result = null;
-        URL urlCon = (true) ? new URL(url + "&currencies=" + val1 + "," + val2)
-                : new URL(url + "&symbols=" + val1 + "," + val2);
+        URL urlCon = new URL(url + val1 + "," + val2);
         HttpURLConnection httpURLConnection = (HttpURLConnection) urlCon.openConnection();
         httpURLConnection.setRequestMethod("GET");
         int responseCode = httpURLConnection.getResponseCode();
@@ -80,7 +81,7 @@ public class Connection {
             response.delete(0, response.length());
 
         } else {
-            new Throwable("GET NOT WORKED");
+            throw new Exception("GET NOT WORKED");
 
         }
         return result;
